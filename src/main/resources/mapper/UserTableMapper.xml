@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sk.mapper.UserTableMapper" >
+  <resultMap id="BaseResultMap" type="com.sk.entity.UserTable" >
+    <id column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="passWord" property="passWord" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userName, passWord
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from usertable
+    where userName = #{userName,jdbcType=VARCHAR}
+  </select>
+   <select id="login" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from usertable
+    where userName = #{userName,jdbcType=VARCHAR}
+    and passWord= #{passWord,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from usertable
+    where userName = #{userName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sk.entity.UserTable" >
+    insert into usertable (userName, passWord)
+    values (#{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sk.entity.UserTable" >
+    insert into usertable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        userName,
+      </if>
+      <if test="passWord != null" >
+        passWord,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sk.entity.UserTable" >
+    update usertable
+    <set >
+      <if test="passWord != null" >
+        passWord = #{passWord,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userName = #{userName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sk.entity.UserTable" >
+    update usertable
+    set passWord = #{passWord,jdbcType=VARCHAR}
+    where userName = #{userName,jdbcType=VARCHAR}
+  </update>
+</mapper>

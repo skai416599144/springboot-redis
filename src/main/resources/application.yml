@@ -1,0 +1,43 @@
+spring:
+   datasource:
+        name: redistest
+        url: jdbc:mysql://127.0.0.1:3306/redistest?characterEncoding=UTF-8
+        username: root
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        filters: stat
+        maxActive: 2000
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+        
+redis:
+   database: 0 #Redis数据库索引
+   host: 127.0.0.1 #Redis服务器地址
+   port: 6379 #Redis端口号
+   password: #Redis密码
+    pool:
+      max-active: 8 #Redis连接池最大连接数
+      max-wait: -1 #Redis连接池最大阻塞等待时机 负值代表没有限制
+      max-idle: 8 #Redis最大空闲连接
+      min-idle: 0 #Redis最新空闲连接
+    timeout: 0 #Redis连接超时时间
+    
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  
+logging:
+    level:
+      com.sk.SpringbootRedisApplication: info
+ 
+    
+ 
